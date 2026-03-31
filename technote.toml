@@ -1,0 +1,23 @@
+[technote]
+id = "RTN-119"
+series_id = "RTN"
+canonical_url = "https://rtn-119.lsst.io"
+github_url = "https://github.com/lsst/rtn-119"
+github_default_branch = "main"
+date_created = 2026-03-31T09:21:42Z
+organization.name = "NSF-DOE Vera C. Rubin Observatory"
+organization.ror = "https://ror.org/048g3cy84"
+license.id = "CC-BY-4.0"
+
+[technote.status]
+state = "draft"
+
+[[technote.authors]]
+name.given = "Quentin"
+name.family = "Le Boulc'h"
+internal_id = "leboulchq"
+orcid = "https://orcid.org/0009-0007-5244-3187"
+[[technote.authors.affiliations]]
+name = "CNRS/IN2P3, CC-IN2P3"
+internal_id = "IN2P3-CC"
+address = "Villeurbanne"
