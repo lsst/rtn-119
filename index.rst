@@ -9,9 +9,7 @@ Procedure for creating a butler repository at FrDF for DP1 release
 Introduction
 ============
 
-Community butler repo
-Accessible by users with Indogp-IAM token
-
+The DP1 butler repository at FrDF is a community repository whose purpose is to make DP1 data (produced at USDF) available to the IN2P3 science community. Its content can be accessed directly from the FrDF interactive, computing and notebook platforms for analysis. Access can be configured in the same way as the "main" repo (https://doc.lsst.eu/tutorial/main_butler.html).
 
 Input Datasets
 ==============
