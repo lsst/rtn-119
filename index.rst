@@ -14,11 +14,12 @@ The DP1 butler repository at FrDF is a community repository whose purpose is to 
 Input Datasets
 ==============
 
-Skymap, refcats : voir technote ccms1
-
-raw : specific image in dp1 release dir
-
-calib : idem
+The process of registering and replicating the necessary input datasets is similar to the one described in RTN-103.
+* SkyMap: we use the same ``skymap lsst_cells_v1.skymap.config`` as the one mentionned in RTN-103.
+* Reference catalogs: ``https://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/raw/refcat/the_monster_20250219``
+* Raw exposures: we use the same raw exposures described in RTN-103 present in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/``. We extract the list of exposures to ingest from Rucio.
+* Calibrations: the set of calibrations files used for DP1 have been replicated from USDF into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/calib/``.
+* Products: the datasets generated from DP1 processing at USDF have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``.
 
 Creating and populating the repository
 ======================================
