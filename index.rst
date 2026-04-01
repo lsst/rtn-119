@@ -9,17 +9,49 @@ Procedure for creating a butler repository at FrDF for DP1 release
 Introduction
 ============
 
-The DP1 butler repository at FrDF is a community repository whose purpose is to make DP1 data (produced at USDF) available to the IN2P3 science community. Its content can be accessed directly from the FrDF interactive, computing and notebook platforms for analysis. Access can be configured in the same way as the "main" repo (https://doc.lsst.eu/tutorial/main_butler.html).
+The DP1 butler repository at FrDF is a community repository whose purpose is to make DP1 data (produced at USDF) available to the IN2P3 science community. Its content can be accessed directly from the FrDF interactive, computing and notebook platforms for analysis. Access can be configured in the same way as the "main" repo, as documented `here <https://doc.lsst.eu/tutorial/main_butler.html>`__.
+
 
 Input Datasets
 ==============
 
-The process of registering and replicating the necessary input datasets is similar to the one described in RTN-103.
-* SkyMap: we use the same ``skymap lsst_cells_v1.skymap.config`` as the one mentionned in RTN-103.
-* Reference catalogs: ``https://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/raw/refcat/the_monster_20250219``
-* Raw exposures: we use the same raw exposures described in RTN-103 present in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/``. We extract the list of exposures to ingest from Rucio.
-* Calibrations: the set of calibrations files used for DP1 have been replicated from USDF into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/calib/``.
-* Products: the datasets generated from DP1 processing at USDF have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``.
+The process of registering and replicating the necessary input datasets is mostly similar to the one described in `RTN-103 <https://rtn-103.lsst.io>`__.
+
+.. _import-sky-map:
+
+SkyMap
+------
+
+We use the same ``skymap lsst_cells_v1.skymap.config`` as the one mentionned in `RTN-103 <https://rtn-103.lsst.io>`__.
+
+.. _import-raw-exposures:
+
+Raw images
+----------
+
+We use the LSSTComCam raw exposures located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`` as described in `RTN-103 <https://rtn-103.lsst.io>`__. We extract the list of exposures to ingest from Rucio (give more details?).
+
+.. _import-calibration-data:
+
+Calibration data
+----------------
+
+The set of calibrations files used for DP1 have been replicated from USDF into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/calib/``.
+
+.. _import-reference-catalog:
+
+Reference catalogs
+------------------
+
+We use the reference catalogs replicated from USDF into ``https://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/raw/refcat/the_monster_20250219``.
+
+.. _import-products:
+
+Products
+--------
+
+The datasets generated from the DP1 processing at USDF (catalogs and images) have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``. We consider all datasets, excepted from the tasks metadata, configuration, and logs.
+
 
 Creating and populating the repository
 ======================================
