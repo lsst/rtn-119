@@ -29,7 +29,7 @@ We use the same ``skymap lsst_cells_v1.skymap.config`` as the one mentionned in 
 Raw images
 ----------
 
-We use the LSSTComCam raw exposures located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`` as described in `RTN-103 <https://rtn-103.lsst.io>`__. We extract the list of exposures to ingest from Rucio (give more details?).
+We use the LSSTComCam raw exposures located in ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/`` as described in `RTN-103 <https://rtn-103.lsst.io>`__. We ingest a subset of 1792 exposures (see the :ref:`ingest-raw-exposures` section).
 
 .. _import-calibration-data:
 
@@ -50,7 +50,7 @@ We use the reference catalogs replicated from USDF into ``https://ccdavrubinint.
 Products
 --------
 
-The datasets generated from the DP1 processing at USDF (catalogs and images) have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``. We consider all datasets, excepted from the tasks metadata, configuration, and logs.
+The datasets generated during the DP1 processing at USDF (catalogs and images) have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``. We consider all datasets, excepted from the tasks metadata, configuration, and logs.
 
 
 Creating and populating the repository
@@ -125,7 +125,15 @@ To register the skymap configuration we use the command below:
 Ingest raw exposures
 --------------------
 
-We ingest the raw exposures in parallel using:
+The DP1 exposures to ingest are the ones that are registered in the Rucio container ``dp1:Container/Raw`` at USDF. We extract the list of exposures from Rucio and construct the list of URIs:
+
+.. code-block:: bash
+
+    $ head -n 2 dp1_raws_urls.list
+    davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/20241108/CC_O_20241108_000245/
+    davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/instrument/raw/LSSTComCam/20241108/CC_O_20241108_000246/
+
+We then ingest the raw exposures in parallel using:
 
 .. code-block:: bash
 
@@ -160,7 +168,7 @@ The export file is generated at USDF with:
 
 .. code-block:: bash
 
-    $ export-datasets --root file:///sdf/data/rubin/shared --filename export_refcat.yaml --collections LSSTComCam/DP1 dp1 the_monster_20250219
+    $ export-datasets --root file:///sdf/data/rubin/shared --filename export.yaml --collections LSSTComCam/DP1 dp1 the_monster_20250219
 
 
 .. _add-instrument-calibrations:
