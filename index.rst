@@ -149,17 +149,18 @@ To define visits from the exposures previously ingested into the repository we u
 Ingest reference catalogs
 -------------------------
 
-The corresponding dataset type is registered with:
+The reference catalogs are ingested with:
 
 .. code-block:: bash
 
-    $ butler register-dataset-type $REPO the_monster_20250219 SimpleCatalog htm7
+    $ butler import -t direct --export-file export.yaml $REPO davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/raw/
 
-Then the ingestion is done:
+
+The export file is generated at USDF with:
 
 .. code-block:: bash
 
-    $ butler ingest-files $REPO the_monster_20250219 refcats/DM-49042/the_monster_20250219 --prefix davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst//releases/raw/refcats/the_monster_20250219/ --transfer direct the_monster_20250219_frdf.ecsv
+    $ export-datasets --root file:///sdf/data/rubin/shared --filename export_refcat.yaml --collections LSSTComCam/DP1 dp1 the_monster_20250219
 
 
 .. _add-instrument-calibrations:
@@ -183,7 +184,21 @@ To ingest calibration data we use the command below, for each dataset type:
 
 .. code-block:: bash
 
-    $ butler import -t direct --export-file export.yaml $REPO
+    $ butler import -t direct --export-file export.yaml $REPO $DATA
+
+
+The export file is generated at USDF with:
+
+.. code-block:: bash
+
+    $ export-datasets --filename export.yaml --collections LSSTComCam/DP1 dp1 $dataset
+
+
+for each dataset type. Calibration dataset types are identified in this `reference file <https://github.com/lsst-uk/lsst-uk-butler/blob/main/dp1_auto_ingest/allDataTypesUSDF.list>`__. We consider the following data set types:
+
+* All data set types with ``isCalibration=True`` 
+* ``fgcmLookUpTable``
+* ``standard_passband``
 
 
 .. _ingest-products:
@@ -195,10 +210,24 @@ To ingest products we use the same command, for each dataset type:
 
 .. code-block:: bash
 
-    $ butler import -t direct --export-file export.yaml $REPO
+    $ butler import -t direct --export-file export.yaml $REPO $DATA
+
+
+Similarly, the export files are generated at USDF for each dataset type. We consider all dataset types excepted:
+
+* The ones that have already been previously ingested.
+* All tasks related auxilliary files, i.e. ``TaskMetadata``, ``ButlerLogRecords`` and ``Config`` storage class datasets.
 
 
 
+.. _create-collection:
 
+Create chained collection
+-------------------------
 
+Finally, we define a DP1 collection containing all collections previously defined:
+
+.. code-block:: bash
+
+    $ butler collection-chain dp1 LSSTComCam/DP1 LSSTComCam/runs/DRP/DP1/DM-51335,LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260/20250419T073356Z,LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260/20250417T034317Z,LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260/20250416T185152Z,LSSTComCam/raw/all,LSSTComCam/calib/DM-48955/illumCorr/illuminationCorrection.20250224a,LSSTComCam/calib/DM-48520/DP1/flat-y.20250207a,LSSTComCam/calib/DM-48520/DP1/flat-z.20250207a,LSSTComCam/calib/DM-48520/DP1/flat-i.20250207a,LSSTComCam/calib/DM-48520/DP1/flat-r.20250207a,LSSTComCam/calib/DM-48520/DP1/flat-g.20250207a,LSSTComCam/calib/DM-48520/DP1/flat-u.20250207a,LSSTComCam/calib/DM-48520/DP1/dark.20250207a,LSSTComCam/calib/DM-48520/DP1/bias.20250207a,LSSTComCam/calib/DM-48520/DP1/cti.20250207a,LSSTComCam/calib/DM-48520/DP1/defects.20250207a,LSSTComCam/calib/DM-47365/addManualDefects/defects.20241211a,LSSTComCam/calib/DM-47741/twiflat/flat-y.20241120a,LSSTComCam/calib/DM-47547/twiflat/flat-z.20241113a,LSSTComCam/calib/DM-47547/twiflat/flat-r.20241113a,LSSTComCam/calib/DM-47547/twiflat/flat-g.20241113a,LSSTComCam/calib/DM-47499/twiflat/flat-u.20241110a,LSSTComCam/calib/DM-47447/gainFixup/flat-g.20241107a,LSSTComCam/calib/DM-47447/gainFixup/flat-i.20241107a,LSSTComCam/calib/DM-47447/gainFixup/flat-r.20241107a,LSSTComCam/calib/DM-47447/gainFixup/dark.20241107a,LSSTComCam/calib/DM-47447/gainFixup/bias.20241107a,LSSTComCam/calib/DM-47447/gainFixup/ptc.20241107a,LSSTComCam/calib/DM-47197/pseudoFlat/flat-r.20241028d,LSSTComCam/calib/DM-47197/pseudoFlat/flat-i.20241028d,LSSTComCam/calib/DM-46360/isrTaskLSST/flat-i.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/flat-r.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/flat-g.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/dark.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/bias.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/bfk.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/ptc.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/linearizer.20240926a,LSSTComCam/calib/DM-46360/isrTaskLSST/defects.20240926a,LSSTComCam/calib/DM-47498/fallbackFlats/flat-all.20241112a,LSSTComCam/calib/DM-49734,LSSTComCam/calib/DM-49734/unbounded,refcats/DM-49042/the_monster_20250219,skymaps,LSSTComCam/calib/fgcmcal/DM-48089,LSSTComCam/calib/fgcmcal/DM-48089/standard_passbands
 
