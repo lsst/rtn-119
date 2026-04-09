@@ -137,7 +137,7 @@ We then ingest the raw exposures in parallel using:
 
 .. code-block:: bash
 
-    $ xargs -a dp1_raws_urls.list -L 1 -P 32 butler ingest-raws --transfer direct $REPO
+    $ xargs --arg-file=dp1_raws_urls.list --max-lines=1 --max-procs=32 butler ingest-raws --transfer direct $REPO
 
 
 .. _define-visits:
@@ -161,7 +161,7 @@ The reference catalogs are ingested with:
 
 .. code-block:: bash
 
-    $ butler import -t direct --export-file export.yaml $REPO davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/raw/
+    $ butler import --transfer direct --export-file export.yaml $REPO davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/raw/
 
 
 The export file is generated at USDF with:
@@ -192,7 +192,7 @@ To ingest calibration data we use the command below, for each dataset type:
 
 .. code-block:: bash
 
-    $ butler import -t direct --export-file export.yaml $REPO $DATA
+    $ butler import --transfer direct --export-file export.yaml $REPO $DATA
 
 
 The export file is generated at USDF with:
@@ -218,7 +218,7 @@ To ingest products we use the same command, for each dataset type:
 
 .. code-block:: bash
 
-    $ butler import -t direct --export-file export.yaml $REPO $DATA
+    $ butler import --transfer direct --export-file export.yaml $REPO $DATA
 
 
 Similarly, the export files are generated at USDF for each dataset type. We consider all dataset types excepted:
