@@ -50,7 +50,7 @@ We use the reference catalogs replicated from USDF into ``https://ccdavrubinint.
 Products
 --------
 
-The datasets generated during the DP1 processing at USDF (catalogs and images) have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``. We consider all datasets, excepted from the tasks metadata, configuration, and logs.
+The datasets generated during the DP1 processing at USDF (catalogs and images) have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``. We deliberately don’t ingest into this repository the tasks metadata, configuration, and logs datasets.
 
 
 Creating and populating the repository
