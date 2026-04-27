@@ -351,7 +351,7 @@ The ``LSSTComCam/DP1`` collection should look like this:
 
 .. code-block:: bash
 
-    $ butler query-collections --chains=tree dp1 LSSTComCam/DP1
+    $ butler query-collections --chains=tree $REPO LSSTComCam/DP1
                                      Name                                      Type   
     ---------------------------------------------------------------------- -----------
     LSSTComCam/DP1                                                         CHAINED    
