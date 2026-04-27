@@ -50,7 +50,7 @@ We use the reference catalogs replicated from USDF into ``https://ccdavrubinint.
 Products
 --------
 
-The datasets generated during the DP1 processing at USDF (catalogs and images) have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``. We deliberately do not ingest into this repository the tasks metadata, configuration, and logs datasets.
+The datasets generated during the DP1 processing at USDF (catalogs and images) have been replicated into ``davs://ccdavrubinint.in2p3.fr:2880/pnfs/in2p3.fr/lsst/releases/dp1/LSSTComCam/runs/``.
 
 
 Creating and populating the repository
@@ -211,9 +211,19 @@ The export file is generated at USDF with:
         --collections LSSTComCam/DP1 dp1 $dataset
 
 
-for each dataset type. Calibration dataset types are identified in this `reference file <https://github.com/lsst-uk/lsst-uk-butler/blob/main/dp1_auto_ingest/allDataTypesUSDF.list>`__. We consider the following data set types:
+for each dataset type. Calibration dataset types are identified in this `reference file <https://github.com/lsst-uk/lsst-uk-butler/blob/main/dp1_auto_ingest/allDataTypesUSDF.list>`__. We consider all data set types with ``isCalibration=True``, as well as the ``fgcmLookUpTable`` and ``standard_passband`` datasets:
 
-* All data set types with ``isCalibration=True`` 
+* ``flat``
+* ``bfk``
+* ``defects``
+* ``cti``
+* ``ptc``
+* ``dark``
+* ``linearizer``
+* ``camera``
+* ``illuminationCorrection``
+* ``bias``
+* ``crosstalk``
 * ``fgcmLookUpTable``
 * ``standard_passband``
 
@@ -222,6 +232,8 @@ for each dataset type. Calibration dataset types are identified in this `referen
 
 Ingest products
 ---------------
+
+We deliberately do not ingest into this repository the tasks metadata, configuration, and logs datasets.
 
 To ingest products we use the same command, for each dataset type:
 
