@@ -344,6 +344,84 @@ Finally, we define a DP1 collection containing all collections previously define
         LSSTComCam/calib/fgcmcal/DM-48089, \
         LSSTComCam/calib/fgcmcal/DM-48089/standard_passbands
 
+Inspecting and checking the Butler repository
+=============================================
+
+The ``LSSTComCam/DP1`` collection should look like this:
+
+.. code-block:: bash
+
+    $ butler query-collections --chains=tree dp1 LSSTComCam/DP1
+                                     Name                                      Type   
+    ---------------------------------------------------------------------- -----------
+    LSSTComCam/DP1                                                         CHAINED    
+      LSSTComCam/runs/DRP/DP1/DM-51335                                     RUN        
+      LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260/20250419T073356Z            RUN        
+      LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260/20250417T034317Z            RUN        
+      LSSTComCam/runs/DRP/DP1/v29_0_0/DM-50260/20250416T185152Z            RUN        
+      LSSTComCam/raw/all                                                   RUN        
+      LSSTComCam/calib/DM-48955/illumCorr/illuminationCorrection.20250224a CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-y.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-z.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-i.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-r.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-g.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/flat-u.20250207a                       CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/dark.20250207a                         CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/bias.20250207a                         CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/cti.20250207a                          CALIBRATION
+      LSSTComCam/calib/DM-48520/DP1/defects.20250207a                      CALIBRATION
+      LSSTComCam/calib/DM-47365/addManualDefects/defects.20241211a         CALIBRATION
+      LSSTComCam/calib/DM-47741/twiflat/flat-y.20241120a                   CALIBRATION
+      LSSTComCam/calib/DM-47547/twiflat/flat-z.20241113a                   CALIBRATION
+      LSSTComCam/calib/DM-47547/twiflat/flat-r.20241113a                   CALIBRATION
+      LSSTComCam/calib/DM-47547/twiflat/flat-g.20241113a                   CALIBRATION
+      LSSTComCam/calib/DM-47499/twiflat/flat-u.20241110a                   CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/flat-g.20241107a                 CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/flat-i.20241107a                 CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/flat-r.20241107a                 CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/dark.20241107a                   CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/bias.20241107a                   CALIBRATION
+      LSSTComCam/calib/DM-47447/gainFixup/ptc.20241107a                    CALIBRATION
+      LSSTComCam/calib/DM-47197/pseudoFlat/flat-r.20241028d                CALIBRATION
+      LSSTComCam/calib/DM-47197/pseudoFlat/flat-i.20241028d                CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/flat-i.20240926a               CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/flat-r.20240926a               CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/flat-g.20240926a               CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/dark.20240926a                 CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/bias.20240926a                 CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/bfk.20240926a                  CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/ptc.20240926a                  CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/linearizer.20240926a           CALIBRATION
+      LSSTComCam/calib/DM-46360/isrTaskLSST/defects.20240926a              CALIBRATION
+      LSSTComCam/calib/DM-47498/fallbackFlats/flat-all.20241112a           CALIBRATION
+      LSSTComCam/calib/DM-49734                                            CALIBRATION
+      LSSTComCam/calib/DM-49734/unbounded                                  RUN        
+      refcats/DM-49042/the_monster_20250219                                RUN        
+      skymaps                                                              RUN        
+      LSSTComCam/calib/fgcmcal/DM-48089                                    RUN        
+      LSSTComCam/calib/fgcmcal/DM-48089/standard_passbands                 RUN  
+
+
+One can then check that all raws have been correctly ingested:
+
+.. code-block:: bash
+
+    $ butler query-datasets $REPO raw --collections LSSTComCam/raw/all --limit 0 | wc -l
+    16129
+
+Since there are 9 detectors in LSSTComCam, this corresponds to the 1792 ingested exposures.
+
+One can also check that we have access to coadded images in the repository:
+
+.. code-block:: bash
+
+    $ butler query-datasets $REPO deep_coadd --limit 1
+       type                  run                                 id                  band     skymap    tract patch
+    ---------- -------------------------------- ------------------------------------ ---- ------------- ----- -----
+    deep_coadd LSSTComCam/runs/DRP/DP1/DM-51335 df7a83cd-0270-4b5c-8d1c-475b7eb00b7b    g lsst_cells_v1 10221    90
+
+
 
 Acknowledgements
 ================
