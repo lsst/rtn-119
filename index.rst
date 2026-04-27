@@ -4,7 +4,7 @@ Procedure for creating a butler repository at FrDF for DP1 release
 
 .. abstract::
 
-   In this note we document the process applied at the Rubin France Data Facility (FrDF) for creating a butler repository exposing the DP1 data that have been produced at the Rubin US Data Facility (USDF).
+   In this note we document the process applied at the Rubin France Data Facility (FrDF) for creating a butler repository exposing the DP1 data that have been produced at the Rubin US Data Facility (USDF). All commands have been executed using the middleware from the weekly ``w_2026_11``.
 
 Introduction
 ============
@@ -294,4 +294,9 @@ Finally, we define a DP1 collection containing all collections previously define
         skymaps, \
         LSSTComCam/calib/fgcmcal/DM-48089, \
         LSSTComCam/calib/fgcmcal/DM-48089/standard_passbands
+
+
+Acknowledgements
+================
+
 
