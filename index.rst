@@ -348,4 +348,4 @@ Finally, we define a DP1 collection containing all collections previously define
 Acknowledgements
 ================
 
-
+Thanks to E. Sutorius from the UK Data Facility for discussion on the ingestion procedure, and for providing the list of dataset types.
