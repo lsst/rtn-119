@@ -194,6 +194,24 @@ To ingest the known calibration data for LSSTComCam we use the command below:
 Ingest calibration data
 -----------------------
 
+Calibration dataset types are identified in this `reference file <https://github.com/lsst-uk/lsst-uk-butler/blob/main/dp1_auto_ingest/allDataTypesUSDF.list>`__. We consider all dataset types with ``isCalibration=True``, as well as the ``fgcmLookUpTable`` and ``standard_passband`` datasets:
+
+.. code-block:: bash
+
+    flat
+    bfk
+    defects
+    cti
+    ptc
+    dark
+    linearizer
+    camera
+    illuminationCorrection
+    bias
+    crosstalk
+    fgcmLookUpTable
+    standard_passband
+
 To ingest calibration data we use the command below, for each dataset type:
 
 .. code-block:: bash
@@ -211,21 +229,7 @@ The export file is generated at USDF with:
         --collections LSSTComCam/DP1 dp1 $dataset
 
 
-for each dataset type. Calibration dataset types are identified in this `reference file <https://github.com/lsst-uk/lsst-uk-butler/blob/main/dp1_auto_ingest/allDataTypesUSDF.list>`__. We consider all data set types with ``isCalibration=True``, as well as the ``fgcmLookUpTable`` and ``standard_passband`` datasets:
-
-* ``flat``
-* ``bfk``
-* ``defects``
-* ``cti``
-* ``ptc``
-* ``dark``
-* ``linearizer``
-* ``camera``
-* ``illuminationCorrection``
-* ``bias``
-* ``crosstalk``
-* ``fgcmLookUpTable``
-* ``standard_passband``
+for each dataset type. 
 
 
 .. _ingest-products:
@@ -233,7 +237,44 @@ for each dataset type. Calibration dataset types are identified in this `referen
 Ingest products
 ---------------
 
-We deliberately do not ingest into this repository the tasks metadata, configuration, and logs datasets.
+Products dataset types are also identified in this `reference file <https://github.com/lsst-uk/lsst-uk-butler/blob/main/dp1_auto_ingest/allDataTypesUSDF.list>`__. We consider all dataset types excepted the ones that have already been previously ingested. Moreover, we deliberately do not ingest into this repository the tasks metadata, configuration, and logs datasets, i.e. the ones with ``TaskMetadata``, ``ButlerLogRecords`` and ``Config`` storage class. The resulting list of products dataset types is the following:
+
+.. code-block:: bash
+
+    deep_coadd
+    deep_coadd_background
+    deepCoadd_dcr_ddec_consolidated_map_weighted_mean
+    deepCoadd_dcr_dra_consolidated_map_weighted_mean
+    deepCoadd_dcr_e1_consolidated_map_weighted_mean
+    deepCoadd_dcr_e2_consolidated_map_weighted_mean
+    deepCoadd_epoch_consolidated_map_max
+    deepCoadd_epoch_consolidated_map_mean
+    deepCoadd_epoch_consolidated_map_min
+    deepCoadd_exposure_time_consolidated_map_sum
+    deep_coadd_n_image
+    deepCoadd_psf_e1_consolidated_map_weighted_mean
+    deepCoadd_psf_e2_consolidated_map_weighted_mean
+    deepCoadd_psf_maglim_consolidated_map_weighted_mean
+    deepCoadd_psf_size_consolidated_map_weighted_mean
+    deepCoadd_sky_background_consolidated_map_weighted_mean
+    deepCoadd_sky_noise_consolidated_map_weighted_mean
+    dia_object
+    dia_object_forced_source
+    dia_source
+    difference_image
+    object
+    object_forced_source
+    object_scarlet_models
+    source
+    ss_object
+    ss_source
+    standard_passband
+    template_coadd
+    visit_detector_table
+    visit_image
+    visit_image_background
+    visit_summary
+    visit_table
 
 To ingest products we use the same command, for each dataset type:
 
@@ -243,11 +284,7 @@ To ingest products we use the same command, for each dataset type:
         $REPO $DATA
 
 
-Similarly, the export files are generated at USDF for each dataset type. We consider all dataset types excepted:
-
-* The ones that have already been previously ingested.
-* All tasks related auxiliary files, i.e. ``TaskMetadata``, ``ButlerLogRecords`` and ``Config`` storage class datasets.
-
+Similarly, the export files are generated at USDF for each dataset type. 
 
 
 .. _create-collection:
